@@ -1,0 +1,22 @@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th *ngFor="let item of columns">{{item.label}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of data">
+                <td *ngFor="let column of columns">
+                    <span *ngIf="!column.render">{{item[column.dataIndex]}}</span>
+                    <span *ngIf="column.render">
+                        <dynamic-loader-container 
+                            [item]="{'component': column.render, data: { column: column, record: item}}"
+                        >
+                        </dynamic-loader-container>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
